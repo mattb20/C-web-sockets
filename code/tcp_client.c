@@ -19,4 +19,18 @@ int main() {
   // specify port
   serverAddress.sin_port = htons(9002);
   serverAddress.sin_addr.s_addr = INADDR_ANY;
+
+  int connectionStatus =
+    connect(networkSocket,
+        (struct sockaddr *) &serverAddress, sizeof(serverAddress));
+
+  // check for error in connection
+  if (connectionStatus == -1) {
+    printf("something went wrong in connection\n", );
+  }
+
+  // receive data from server
+  char serverResponse[256];
+  recv(networkSocket, &serverResponse, sizeof(serverResponse), 0); // data will be assigned to serverResponse
+
 }
